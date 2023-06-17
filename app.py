@@ -124,4 +124,4 @@ class Types(db.Model):
     acting = db.Column(db.String(10))
 
 
-serve(app, host='0.0.0.0', port=5000, threads=1) #WAITRESS!
+serve(app, host='0.0.0.0', port=5050, threads=1) #WAITRESS!
