@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="shadow p-3 mb-5 bg-body rounded">
+	<h1>
+		<i class="bi bi-search"></i>
+		Search
+	</h1>
+	<br/>
+
+	<form method="POST">
+
+		{{ form.hidden_tag() }}
+
+		<table class="table">
+			<tr>
+				<td colspan="2" class="text-center">Search Dates</td>
+				<td colspan="2" class="text-center">Search Times</td>
+				<td>search for</td>
+				<td>Computer Name</td>
+				<td>
+					<a href="{{url_for('home')}}">
+						<button type="button" class="btn btn-info" title="Search Servers" data-bs-toggle="modal" data-bs-target="#searchModal">
+							Reset
+						</button>
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td>{{ form.date_start(class="form-control") }}</td>
+				<td>{{ form.date_end(class="form-control") }}</td>
+				<td>{{ form.time_start(class="form-control") }}</td>
+				<td>{{ form.time_end(class="form-control") }}</td>
+				<td>{{ form.search(class="form-control") }}</td>
+				<td>{{ form.computer(class="form-control") }}</td>
+				<td>{{ form.submit(class="btn btn-success") }}</td>
+			</tr>
+		</table>
+
+		<table class="table">
+			<tr>
+				<td>Date</td>
+				<td>Time</td>
+				<td>Type</td>
+				<td>Search</td>
+			</tr>
+
+			{% for log in logs %}
+			<tr>
+				<td>{{log.date}}</td>
+				<td>{{log.time}}</td>
+				<td>{{log.type}}</td>
+				<td>{{log.name}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+
+	</form>
+</div>
+{% endblock %}

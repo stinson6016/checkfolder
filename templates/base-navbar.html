@@ -1,0 +1,104 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('home') }}">
+        <div class="d-none d-md-block">
+          <i class="bi bi-airplane navico-plane" title="Flights"></i>
+          Flight Logs
+        </div>
+        <div class="d-md-none">
+          <i class="bi bi-airplane navico-plane" title="Flights"></i>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+          {% if current_user.is_authenticated %}
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('addflight')}}">
+              <div class="d-none d-md-block">
+                Add a Flight
+              </div>
+              <div class="d-md-none">
+                <i class="bi bi-journal-plus navico" title = "Quick Add"></i>
+              </div>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('info')}}">
+              <div class="d-none d-md-block">
+                Plane Info
+              </div>
+              <div class="d-md-none">
+                <i class="bi bi-info-circle navico" title="Info"></i>
+              </div>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('mainoilshow')}}">
+              <div class="d-none d-md-block">
+                Maintenance
+              </div>
+              <div class="d-md-none">
+                <i class="bi bi-journals navico" title="Maintenance"></i>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('help')}}">
+              <div class="d-none d-md-block">
+                Help
+              </div>
+              <div class="d-md-none">
+                <i class="bi bi-question-circle navico" title="Help"></i>
+              </div>
+            </a>
+          </li>
+
+          {% endif %}
+          {% if current_user.sa == 'y' %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('planes')}}">
+              <div class="d-none d-md-block">
+                Site Admin
+              </div>
+              <div class="d-md-none">
+                <i class="bi bi-person-gear navico" title="Help"></i>
+              </div>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      
+      {% if current_user.is_authenticated %}
+      <div style="color: whitesmoke">
+        <a class="nav-link" href="{{ url_for('logout')}}">
+          <div class="d-none d-md-block">
+            Logout
+          </div>
+          <div class="d-md-none">
+            <i class="bi bi-box-arrow-left" title="Logout" style="color: whitesmoke"></i>
+          </div>
+        </a>
+      </div>
+      {% else %}
+      <div style="color: whitesmoke"> 
+        <a class="nav-link" href="{{ url_for('login')}}">
+          <div class="d-none d-md-block">
+            Login
+          </div>
+          <div class="d-md-none">
+            <i class="bi bi-box-arrow-right" title="Login" style="color: whitesmoke"></i>
+          </div>
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </nav>
