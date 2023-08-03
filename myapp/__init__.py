@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from dotenv import load_dotenv
 
 from .extensions import db, migrate, api
@@ -25,5 +25,13 @@ def create_app():
     # blueprint register
     app.register_blueprint(home)
     api.add_resource(AddChangeLog, '/api/watch')
+       
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template("404.html"), 404
+    
+    @app.errorhandler(500)
+    def page_not_found(e):
+        return render_template("500.html"), 500
     
     return app

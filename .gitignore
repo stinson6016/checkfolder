@@ -2,3 +2,4 @@
 trackmyflight.code-workspace
 venv/
 __pycache__/
+migrations/

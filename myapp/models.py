@@ -1,6 +1,4 @@
-
 from . import db
-
 
 class Changelog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
