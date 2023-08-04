@@ -8,13 +8,10 @@ def create_app():
     import os
 
     load_dotenv()
-    DB_SERVER = os.getenv('DB_SERVER')
-    SECRET_KEY = os.getenv('SECRET_KEY')
-
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = DB_SERVER
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_SERVER')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = SECRET_KEY
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
     db.init_app(app)
     migrate.init_app(app, db)
     api.init_app(app)
@@ -24,8 +21,11 @@ def create_app():
 
     # blueprint register
     app.register_blueprint(home)
+
+    # api register
     api.add_resource(AddChangeLog, '/api/watch')
-       
+    
+    # error pages
     @app.errorhandler(404)
     def page_not_found(e):
         return render_template("404.html"), 404
